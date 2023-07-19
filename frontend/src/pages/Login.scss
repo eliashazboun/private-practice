@@ -1,0 +1,45 @@
+.login {
+  background-image: url('../pictures/sven-brandsma-JhoEKjjYWhU-unsplash.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  .wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+
+    form {
+      background-color: white;
+      padding: 20px 60px;
+      margin-bottom: 30px;
+      border-radius: 10px;
+      box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+  }
+
+  button {
+    width: 100%;
+    height: 50px;
+    padding: 10px;
+    border: none;
+    background-color: blue;
+    color: white;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 18px;
+    cursor: pointer;
+    margin-top: 15px;
+    margin-bottom: 5px;
+  }
+
+  .error{
+    text-align: center;
+    color: red;
+    margin-bottom: 20px;
+  }
+}

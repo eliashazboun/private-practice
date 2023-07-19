@@ -1,0 +1,44 @@
+@import url("https://fonts.googleapis.com/css2?family=BioRhyme:wght@200;300;400;700;800&family=Roboto:wght@300&display=swap");
+.signup {
+  background-image: url("../pictures/pexels-pixabay-273238.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: inherit;
+  position: relative;
+  .wrapper {
+    max-width: 1000px;
+    margin: 0px auto;
+    display: flex;
+    // flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    form {
+      margin-top: 40px;
+      background-color: white;
+      padding: 20px 60px;
+      margin-bottom: 30px;
+      border-radius: 10px;
+      box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    button {
+      width: 100%;
+      height: 50px;
+      padding: 10px;
+      border: none;
+      background-color: blue;
+      color: white;
+      border-radius: 5px;
+      font-weight: bold;
+      font-size: 18px;
+      cursor: pointer;
+      margin-top: 15px;
+      margin-bottom: 30px;
+    }
+  }
+}

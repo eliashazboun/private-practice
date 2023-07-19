@@ -1,0 +1,19 @@
+.footer {
+  .wrapper {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+    height: 150px;
+
+    .item {
+      text-align: center;
+
+      .title {
+        font-weight: 800;
+        text-align: center;
+        text-decoration: underline;
+      }
+    }
+  }
+}

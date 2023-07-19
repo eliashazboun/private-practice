@@ -1,0 +1,118 @@
+.view-appointments {
+  padding-top: 20px;
+
+  .react-tabs {
+    .tabs {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+      list-style: none;
+      border-bottom: 2px solid black;
+      z-index: 1;
+
+      .tab {
+        border-top: 2px solid black;
+        border-left: 2px solid black;
+        border-right: 2px solid black;
+        border-radius: 5px 5px 0px 0px;
+        color: gray;
+
+        padding: 20px;
+      }
+
+      .react-tabs__tab--selected {
+        background-color: rgb(50, 144, 0);
+        transform: translateY(6px);
+        color: white;
+      }
+    }
+
+    .panel{
+        margin-top: 20px;
+
+        h2{
+            text-align: center;
+
+        }
+
+        .table{
+            display: flex;
+            flex-direction: column;
+
+
+            .head{
+                padding-left: 20px;
+                    padding-right: 20px;
+
+                
+                tr{
+                    display: flex;
+                    justify-content: space-evenly;
+                    border: 1px solid gray;
+                    
+
+                    th{
+                        flex: 1;
+
+                    }
+                }
+            }
+
+            .body{
+                padding-left: 20px;
+                padding-right: 20px;
+                tr{
+                    display: flex;
+                    justify-content: center;
+                    border: 1px solid gray;
+                    padding: 5px;
+                    align-items: center;
+                    td{
+                        flex: 1;
+                        text-align: center;
+                        .paid{
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            .status{
+                                border: 2px solid black;
+                                width: fit-content;
+                            }
+
+                        }
+
+                        .unpaid{
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            .status{
+                                border: 2px solid black;
+                                padding: 2px;
+                                border-radius: 5px;
+                                font-weight: 800;
+                                color: white;
+                                background-color: red;
+                                width: fit-content;
+                            }
+                        }
+                        .icon{
+                            color: rgb(255, 0, 0);
+                            height: 35px;
+                            width: 35px;
+                            cursor: pointer;
+                            border-radius: 50%;
+                            &:hover{
+                                background-color: rgba(255, 0, 0, 0.096);
+                            }
+                            
+                        }
+                    }
+                }
+
+            }
+
+        }
+    }
+  }
+}

@@ -1,0 +1,52 @@
+.clients {
+  padding: 20px;
+  
+    a{
+        text-decoration: none;
+        color: black;
+    }
+  .header {
+    display: flex;
+    gap: 20px;
+    text-align: left;
+    padding-left: 10px;
+    border: 1px solid gray;
+
+    .item {
+      flex: 1;
+      font-weight: 800;
+    }
+  }
+
+  .client-details {
+    border: 1px solid gray;
+    display: flex;
+    padding: 10px;
+    gap: 20px;
+    justify-content: space-evenly;
+    align-items: center;
+
+    &:hover{
+      background-color: rgba(128, 128, 128, 0.356);
+    }
+
+    .name {
+      flex: 1;
+      a {
+        text-decoration: none;
+      }
+    }
+
+    .phone {
+      flex: 1;
+    }
+
+    .email {
+      flex: 1;
+    }
+
+    .birthday {
+      flex: 1;
+    }
+  }
+}

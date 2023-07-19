@@ -1,0 +1,16 @@
+.demoapp {
+  display: flex;
+  padding-left: 30px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+  .input {
+    flex: 1;
+    padding-right: 30px;
+    padding-top: 70px;
+  }
+
+  .calendar {
+    flex: 2;
+    padding-right: 30px;
+  }
+}
