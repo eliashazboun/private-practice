@@ -1,42 +1,30 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./AdminDashboard.scss";
 
 import { decodeToken } from "react-jwt";
-import axios from "axios";
+import SidebarItem from "../components/SidebarItem/SidebarItem";
+import AdminDashView from "../components/AdminDashView/AdminDashView";
 
 const AdminDashboard = () => {
-  const [loading, setLoading] = useState(true);
 
-  const populateDash = async () => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      const res = await axios.get("/api/admindash", {
-        headers: { "x-access-token": token },
-      });
-      console.log(res.data);
-      setLoading(false);
-    } else {
-      console.log("No token found");
-    }
-  };
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      const user = decodeToken(token);
-      if (user) {
-        populateDash();
-      } else {
-        localStorage.removeItem("token");
-        window.location.href = "/api/login";
-      }
-    } else {
-      window.location.href = "/";
-    }
-  }, []);
+  const [view, setView] = useState()
+
+  const clickHandler = (e) => {
+    setView(e.target.id)
+
+  }
+
   return (
     <div className="adminDash">
       <div className="wrapper">
-        {loading ? <h1>Loading</h1> : <h1>Admin Dash</h1>}
+        <div className="sidebar">
+          <SidebarItem id='client' title='client' onClick={clickHandler}></SidebarItem>
+          <SidebarItem id='appointment' title='appointment' onClick={clickHandler}></SidebarItem>
+          <SidebarItem id='video' title='video' onClick={clickHandler}></SidebarItem>
+        </div>
+        <div className="content">
+          <AdminDashView view={view}/>
+        </div>
       </div>
     </div>
   );

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import "./NavBar.scss";
 import Button from "../Button/Button";
 
-const NavBar = () => {
+const NavBar = ({isLoggedIn}) => {
   const location = useLocation();
   const [showNavbar, setShowNavbar] = useState(false);
   const [buttonTitle, setButtonTitle] = useState();
@@ -28,6 +28,15 @@ const NavBar = () => {
     setPath(location.pathname);
   };
 
+  const handleLogout = () => {
+    const token = localStorage.getItem('token');
+    if(token){
+      localStorage.removeItem('token')
+      window.location.href = "/api/login"
+    }
+
+  }
+
   useEffect(() => {
     if (path === "/api/login") {
       setButtonTitle("Sign Up");
@@ -37,6 +46,7 @@ const NavBar = () => {
       setButtonTitle("Login / Signup");
     }
   }, []);
+
 
   return (
     <div className="navbar">
@@ -58,8 +68,16 @@ const NavBar = () => {
           <Link to="/api/video">
             <h4>Video</h4>
           </Link>
+          <Link to="/api/admindash">
+            <h4>admindash</h4>
+          </Link>
+          <Link to="/api/clientdash">
+            <h4>clientdash</h4>
+          </Link>
         </div>
         <div className="right">
+          {isLoggedIn ? <Button title='Logout' kind='red' handler={handleLogout}/> : 
+          <>
           <Link>
             <Button
               title={buttonTitle}
@@ -72,6 +90,8 @@ const NavBar = () => {
             kind="orange"
             handler={() => console.log(path)}
           ></Button>
+          </>
+          }
           <MenuIcon className="hamburger" onClick={handleShowNavbar} />
         </div>
       </div>

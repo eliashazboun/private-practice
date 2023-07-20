@@ -5,7 +5,7 @@ import axios from "axios";
 import { useState } from "react";
 import { decodeToken } from "react-jwt";
 
-const Login = (props) => {
+const Login = ({setIsLoggedIn}) => {
   const [error, setError] = useState(false);
 
   const [values, setValues] = useState({
@@ -45,8 +45,10 @@ const Login = (props) => {
         localStorage.setItem("token", response.data.token);
         const { isAdmin } = decodeToken(response.data.token);
         if (isAdmin) {
+          setIsLoggedIn(true)
           window.location.href = "/api/admindash";
         } else {
+          setIsLoggedIn(true)
           window.location.href = "/api/clientdash";
         }
       }
