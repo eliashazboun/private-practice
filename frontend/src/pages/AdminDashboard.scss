@@ -1,17 +1,8 @@
 .adminDash{
     .wrapper{
         display: flex;
-
-        .sidebar{
-            flex: 1;
-            border: 2px solid black;
-            height: 100vh;
-
-        }
-
         .content{
-            flex: 6;
-            border: 2px solid lime;
+            flex: 7;
 
         }
     }

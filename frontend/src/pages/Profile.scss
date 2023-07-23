@@ -1,8 +1,20 @@
 .profile {
-  .heading {
-    font-weight: 800;
-    font-size: 2rem;
-    text-align: center;
+
+  .top{
+    display: flex;
+    padding-top: 20px;
+
+
+    .backArrow{
+      cursor: pointer;
+      font-size: 40px;
+    }
+    .heading {
+      font-weight: 800;
+      width: 100%;
+      font-size: 2rem;
+      text-align: center;
+    }
   }
 
   .buttons {

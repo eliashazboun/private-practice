@@ -1,0 +1,12 @@
+.contentItem{
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 5px;
+    .label{
+        color: gray;
+
+        
+    }
+}

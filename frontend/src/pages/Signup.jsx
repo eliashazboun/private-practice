@@ -171,7 +171,7 @@ const Signup = () => {
           <p style={{color: 'red',textAlign: 'center'}}>{error}</p>
           <button>Sign Up</button>
           
-          <Link to="/api/login">
+          <Link to="/api/login" onClick={() => window.location.reload}>
             <p style={{ textAlign: "center" }}>
               Already have an account? Log In.
             </p>

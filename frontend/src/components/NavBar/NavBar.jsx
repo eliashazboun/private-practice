@@ -1,14 +1,18 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation} from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useEffect, useState } from "react";
 import "./NavBar.scss";
 import Button from "../Button/Button";
+import UserThumbnail from "../UserThumbnail/UserThumbnail";
+import { decodeToken } from "react-jwt";
 
-const NavBar = ({isLoggedIn}) => {
+const NavBar = ({isLoggedIn, user}) => {
   const location = useLocation();
   const [showNavbar, setShowNavbar] = useState(false);
   const [buttonTitle, setButtonTitle] = useState();
   const [path, setPath] = useState(location.pathname);
+  const [name, setName] = useState()
+
 
   const handleAlternate = (e) => {
     if (window.location.pathname === "/api/login") {
@@ -38,6 +42,10 @@ const NavBar = ({isLoggedIn}) => {
   }
 
   useEffect(() => {
+    if (isLoggedIn){
+      setName(user.name)
+    }
+    console.log(user)
     if (path === "/api/login") {
       setButtonTitle("Sign Up");
     } else if (path === "/api/signup") {
@@ -57,9 +65,7 @@ const NavBar = ({isLoggedIn}) => {
           </Link>
         </div>
         <div className={showNavbar ? "center active" : "center"}>
-          <Link to="/api/clients" onClick={handlePath}>
-            <h4>Clients</h4>
-          </Link>
+        
 
           <Link to="/api/appointments">
             <h4>Appointments</h4>
@@ -73,11 +79,17 @@ const NavBar = ({isLoggedIn}) => {
           </Link>
           <Link to="/api/clientdash">
             <h4>clientdash</h4>
+          
           </Link>
         </div>
         <div className="right">
-          {isLoggedIn ? <Button title='Logout' kind='red' handler={handleLogout}/> : 
-          <>
+          {isLoggedIn ? 
+          <div className="loggedIn">
+            <Button title='Logout' kind='red' handler={handleLogout}/> 
+            <UserThumbnail name={name}/>
+          </div>
+          : 
+          <div className="loggedOut">
           <Link>
             <Button
               title={buttonTitle}
@@ -90,7 +102,7 @@ const NavBar = ({isLoggedIn}) => {
             kind="orange"
             handler={() => console.log(path)}
           ></Button>
-          </>
+          </div>
           }
           <MenuIcon className="hamburger" onClick={handleShowNavbar} />
         </div>

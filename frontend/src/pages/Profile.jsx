@@ -1,64 +1,95 @@
-import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
-
-import ClientInfo from "../components/ClientInfo/ClientInfo";
+import TabSelector from "../components/TabSelector/TabSelector";
 import CreateAppointment from "../components/CreateAppointment/CreateAppointment";
 import ViewAppointments from "../components/ViewAppointments/ViewAppointments";
 import EditAppointment from "../components/EditAppointments/EditAppointment";
-import Button from "../components/Button/Button";
+
+import ProfileTab from '../components/ClientTabs/ProfileTab/ProfileTab'
+import MessagesTab from '../components/ClientTabs/MessagesTab/MessagesTab'
+import AppointmentsTab from '../components/ClientTabs/AppointmentsTab/AppointmentsTab'
+import RecordsTab from '../components/ClientTabs/RecordsTab/RecordsTab'
+import BillingTab from '../components/ClientTabs/BillingTab/BillingTab'
+
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import EmailIcon from '@mui/icons-material/Email';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import FolderIcon from '@mui/icons-material/Folder';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+
 
 import './Profile.scss'
 
-const Profile = () => {
-  const location = useLocation();
-  const { clientId } = location.state;
+const Profile = ({clientId, setView}) => {
+  const [client, setClient] = useState([]);
+
   const URI = `/api/profile/${clientId}`;
 
-  const [client, setClient] = useState([]);
-  const [active, setActive] = useState("create");
-
-  const handleClick = (e) => {
-    console.log(e)
-    setActive(e.target.id)
-  }
-
+  
   const fetchProfile = async () => {
     try {
       const response = await fetch(URI);
       const json = await response.json();
-
-      const { password, ...newJson } = json;
-
       if (response.ok) {
-        setClient(newJson);
+        setClient(json);
       }
     } catch (err) {
       console.log(err);
     }
   };
 
+
+  const tabs=[ 
+    {
+      title: 'Profile',
+      icon: <AccountBoxIcon/>,
+      view: <ProfileTab/>
+    },
+    {
+      title: 'Messages',
+      icon: <EmailIcon/>,
+      view: <MessagesTab/>
+
+    },
+    {
+      title: 'Appointments',
+      icon: <CalendarMonthIcon/>,
+      view: <AppointmentsTab/>
+
+    },
+    {
+      title:'Records',
+      icon: <FolderIcon/>,
+      view: <RecordsTab/>
+
+    },
+    {
+      title: 'Billing',
+      icon: <AttachMoneyIcon/>,
+      view: <BillingTab/>
+
+    }]
+  
+  
   useEffect(() => {
     fetchProfile();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div className="profile">
-      <div className="heading">
-          <h1>{client.first_name} Profile </h1>
+      <div className="top">
+        <ArrowBackIcon className="backArrow" onClick={() => {setView('client')}} />
+        <div className="heading">
+            <p>{client.first_name} {client.last_name} </p>
+        </div>
       </div>
-      <ClientInfo client={client} />
-      <div className="buttons">
-          <Button title='Create Appointment' id='create' kind='green' handler={handleClick}></Button>
+        <TabSelector
+        client={client ? client : null}
+        tabs={tabs}
+        />
+          {/* <Button title='Create Appointment' id='create' kind='green' handler={handleClick}></Button>
           <Button title='Edit Appointment' id='edit' kind='orange' handler={handleClick}></Button>
-          <Button title='View Appointment' id='view' kind='blue' handler={handleClick}></Button>
-      </div>
-        
-      <div className="container">
-        {active === "create" && (<CreateAppointment id={clientId} name={client.first_name + " " + client.last_name}/> )}
-        {active === "edit" && <EditAppointment></EditAppointment>}
-        {active === "view" && <ViewAppointments client={client} />}
-      </div>
+          <Button title='View Appointment' id='view' kind='blue' handler={handleClick}></Button> */}
     </div>
   );
 };

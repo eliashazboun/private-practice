@@ -1,0 +1,21 @@
+
+.tabSelector{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    .tabs{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .tabView{
+        border: 1px solid lime;
+        height: 100vh;
+        margin: 10px auto;
+        width: 90%;
+        
+        
+    }
+
+}

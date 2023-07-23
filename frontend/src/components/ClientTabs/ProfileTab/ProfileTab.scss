@@ -1,0 +1,12 @@
+.profileTab{
+
+    .icons{
+        display: flex;
+        gap: 20px;
+    }
+
+    .icons > * {
+        cursor: pointer;
+    }
+    
+}

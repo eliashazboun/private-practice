@@ -1,0 +1,51 @@
+.contentBox{
+    margin: 10px 20px;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    .heading{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid black;
+        padding: 8px;
+
+        .add{
+            
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-weight: 1000;
+            color: white;
+            width: 100px;
+            font-size: 20px;
+            background-color: #2e9ae1;
+            transition: 0.05s ease-in;
+
+            &:hover{
+                background-color: #2e99e1ae;
+            }
+        }
+        .title{
+            text-transform: uppercase;
+            color: orange;
+            font-weight: 900;
+            font-family: monospace;
+            font-size: 20px; 
+        }
+
+        .icon{
+            font-size: 30px;
+            color: #2e9ae1;
+            cursor: pointer;
+            padding: 0;
+            margin: 0;
+        }
+    }
+
+    .content{
+        display: flex;
+        flex-direction: column;
+    }
+    
+}

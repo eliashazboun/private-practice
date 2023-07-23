@@ -82,7 +82,7 @@ const Login = ({setIsLoggedIn}) => {
             <p className="error">Invalid credentials, please try again.</p>
           )}
 
-          <Link to="/api/signup">
+          <Link to="/api/signup" onClick={window.location.reload}>
             <p style={{ textAlign: "center" }}>
               Don't have an account? Sign up.
             </p>

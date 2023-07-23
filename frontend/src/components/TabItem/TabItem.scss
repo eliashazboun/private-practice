@@ -1,0 +1,19 @@
+.tabItem {
+  color: #818181;
+  border: 1px solid #E0E0E0;
+  padding: 5px 10px;
+  cursor: pointer;
+  background-color: #f7f7f7;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  z-index: 2;
+}
+
+
+.selected {
+  color: white;
+  background-color: #2e9ae1;
+}

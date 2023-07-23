@@ -1,29 +1,26 @@
 import React, { useState } from "react";
 import "./AdminDashboard.scss";
 
-import { decodeToken } from "react-jwt";
-import SidebarItem from "../components/SidebarItem/SidebarItem";
 import AdminDashView from "../components/AdminDashView/AdminDashView";
+import Sidebar from "../components/Sidebar/Sidebar";
 
 const AdminDashboard = () => {
 
-  const [view, setView] = useState()
+  const [view, setView] = useState('client')
+  const [selected, setSelected] = useState('client')
+
 
   const clickHandler = (e) => {
-    setView(e.target.id)
-
+    setView(e.currentTarget.id)
+    setSelected(e.currentTarget.id)
   }
 
   return (
     <div className="adminDash">
       <div className="wrapper">
-        <div className="sidebar">
-          <SidebarItem id='client' title='client' onClick={clickHandler}></SidebarItem>
-          <SidebarItem id='appointment' title='appointment' onClick={clickHandler}></SidebarItem>
-          <SidebarItem id='video' title='video' onClick={clickHandler}></SidebarItem>
-        </div>
+        <Sidebar clickHandler={clickHandler} selected={selected}/>
         <div className="content">
-          <AdminDashView view={view}/>
+          <AdminDashView view={view} setView={setView}/>
         </div>
       </div>
     </div>

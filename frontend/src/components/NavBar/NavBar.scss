@@ -55,6 +55,11 @@
       align-items: center;
       flex: 1;
 
+      .loggedIn{
+        display: flex;
+        gap: 30px;
+      }
+
       .hamburger {
         display: none;
 

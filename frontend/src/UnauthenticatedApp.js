@@ -10,8 +10,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Footer from './components/Footer/Footer';
 
-function UnauthenticatedApp() {
-  const [isLoggedIn, setIsLoggedIn] = useState()
+function UnauthenticatedApp({isLoggedIn,setIsLoggedIn}) {
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}> 
