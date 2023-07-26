@@ -10,12 +10,13 @@ router.get('/', (req,res) => {
 router.post('/', async (req,res) => {
 
     const user = await Client.findOne({
-        email:req.body.email,
+        username:req.body.email,
         password:req.body.password
     })
     if (user){
         const token = jwt.sign({
-            email:user.email,
+            name: user.first_name,
+            id: user._id,
             isAdmin:user.isAdmin
 
         },process.env.JWT_SECRET)

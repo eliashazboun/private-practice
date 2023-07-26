@@ -1,12 +1,50 @@
 .contentItem{
-    display: flex;
+    
     flex: 1;
-    flex-wrap: wrap;
-    flex-direction: column;
-    gap: 5px;
-    .label{
-        color: gray;
+    position: relative;
+    
+ 
+    .wrapper{
+        flex-direction: column;
+        gap: 5px;
 
+        .contain{
+            display: flex;
+            gap: 20px;
+
+            .value{
+                width:fit-content;
+            }
         
+            .edit{
+                border: 2px solid black;
+                border-radius: 3px;
+                display: flex;
+        
+                
+            }
+        
+            .error{
+                border-color: red;
+                outline-color: red;
+        
+        }
+
+
+
+           
+    
+        }
+        .label{
+            color: gray;
+    
+        }
     }
+}
+
+.errorM{
+    color: red;
+    text-align: left;
+    top: 0;
+    left: 20px;
 }

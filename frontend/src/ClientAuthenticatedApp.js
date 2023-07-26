@@ -13,13 +13,13 @@ import Signup from './pages/Signup';
 
 
 
-function ClientAuthenticatedApp({isLoggedIn, setIsLoggedIn}) {
+function ClientAuthenticatedApp({isLoggedIn, setIsLoggedIn, user}) {
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}> 
       <div className="App">
         <BrowserRouter>
-        <NavBar isLoggedIn={isLoggedIn}/>
+        <NavBar isLoggedIn={isLoggedIn} user={user}/>
         <div className='pages'>
           <Routes>
             <Route path='/' element={<Home/>}/>

@@ -11,7 +11,6 @@ const NavBar = ({isLoggedIn, user}) => {
   const [showNavbar, setShowNavbar] = useState(false);
   const [buttonTitle, setButtonTitle] = useState();
   const [path, setPath] = useState(location.pathname);
-  const [name, setName] = useState()
 
 
   const handleAlternate = (e) => {
@@ -28,9 +27,6 @@ const NavBar = ({isLoggedIn, user}) => {
     setShowNavbar(!showNavbar);
   };
 
-  const handlePath = () => {
-    setPath(location.pathname);
-  };
 
   const handleLogout = () => {
     const token = localStorage.getItem('token');
@@ -42,10 +38,7 @@ const NavBar = ({isLoggedIn, user}) => {
   }
 
   useEffect(() => {
-    if (isLoggedIn){
-      setName(user.name)
-    }
-    console.log(user)
+    
     if (path === "/api/login") {
       setButtonTitle("Sign Up");
     } else if (path === "/api/signup") {
@@ -84,9 +77,9 @@ const NavBar = ({isLoggedIn, user}) => {
         </div>
         <div className="right">
           {isLoggedIn ? 
-          <div className="loggedIn">
+            user && <div className="loggedIn">
             <Button title='Logout' kind='red' handler={handleLogout}/> 
-            <UserThumbnail name={name}/>
+            {user &&<UserThumbnail name={user.name}/>}
           </div>
           : 
           <div className="loggedOut">

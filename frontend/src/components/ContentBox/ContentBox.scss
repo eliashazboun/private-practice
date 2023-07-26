@@ -9,22 +9,35 @@
         align-items: center;
         border-bottom: 1px solid black;
         padding: 8px;
+        
 
         .add{
-            
             border-radius: 5px;
             border: none;
             cursor: pointer;
-            font-weight: 1000;
+            font-weight: 500;
+            padding: 3px;
             color: white;
-            width: 100px;
+            gap: 5px;
+            width: 150px;
+            padding: 5px;
             font-size: 20px;
             background-color: #2e9ae1;
             transition: 0.05s ease-in;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
 
             &:hover{
                 background-color: #2e99e1ae;
             }
+
+            .buttonLabel{
+                font-size: 16px;
+            }
+
+           
         }
         .title{
             text-transform: uppercase;
@@ -35,11 +48,11 @@
         }
 
         .icon{
-            font-size: 30px;
-            color: #2e9ae1;
             cursor: pointer;
-            padding: 0;
-            margin: 0;
+            border-radius: 50%;
+            font-weight: 1600;
+            background-color: white;
+        
         }
     }
 

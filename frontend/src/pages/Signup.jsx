@@ -20,6 +20,41 @@ const Signup = () => {
     password: "",
     confirmPassword: "",
   });
+  const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+  const generateRandom = async () => {
+
+    try {
+      const response = await fetch('https://randomuser.me/api/')
+
+      if (response.ok){
+        const json = await response.json()
+        const {cell, dob, gender, email, name} = json.results[0]
+        let date = new Date(dob.date);
+
+        let year = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(date);
+        let month = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(date);
+        let day = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(date);
+
+        date = `${year}-${month}-${day}`
+
+        setValues({
+          fname:name.first,
+          lname:name.last,
+          birthday:date ,
+          email:email,
+          gender: capitalizeFirstLetter(gender),
+          phone: cell.replace('-',''),
+          password:'password123',
+          confirmPassword:'password123'
+        })
+      }
+    }catch(err){
+      console.log(err)
+    }
+  }
 
   const inputs = [
     {
@@ -121,11 +156,12 @@ const Signup = () => {
         first_name:values.fname,
         last_name:values.lname,
         birthday:values.birthday,
-        email:values.email,
-        phone:values.phone,
+        username:values.email,
         gender: values.gender,
-        password: values.password
-
+        password: values.password,
+        phone: [values.phone],
+        email: [values.email]
+      
       })
     })
 
@@ -151,7 +187,10 @@ const Signup = () => {
   return (
     <div className="signup">
       <div className="wrapper">
+
         <form onSubmit={handleSubmit}>
+        <button className="random" type="button" onClick={generateRandom}>Generate Random</button>
+
           <h1>Create an Account</h1>
           {inputs.map((input) => {
             if (input.id === 5){
@@ -169,7 +208,7 @@ const Signup = () => {
             />)};
           })}
           <p style={{color: 'red',textAlign: 'center'}}>{error}</p>
-          <button>Sign Up</button>
+          <button type="submit" className="submit">Sign Up</button>
           
           <Link to="/api/login" onClick={() => window.location.reload}>
             <p style={{ textAlign: "center" }}>

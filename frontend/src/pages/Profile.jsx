@@ -1,8 +1,5 @@
 import { useEffect, useState } from "react";
 import TabSelector from "../components/TabSelector/TabSelector";
-import CreateAppointment from "../components/CreateAppointment/CreateAppointment";
-import ViewAppointments from "../components/ViewAppointments/ViewAppointments";
-import EditAppointment from "../components/EditAppointments/EditAppointment";
 
 import ProfileTab from '../components/ClientTabs/ProfileTab/ProfileTab'
 import MessagesTab from '../components/ClientTabs/MessagesTab/MessagesTab'
@@ -16,28 +13,22 @@ import EmailIcon from '@mui/icons-material/Email';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import FolderIcon from '@mui/icons-material/Folder';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import ClipLoader from "react-spinners/ClipLoader";
+
 
 
 import './Profile.scss'
+import useFetch from "../hooks/useFetch";
 
-const Profile = ({clientId, setView}) => {
-  const [client, setClient] = useState([]);
+const Profile = ({setView, clientId}) => {
 
-  const URI = `/api/profile/${clientId}`;
+  const {data:client, isLoading} = useFetch(`/api/clients/${clientId}`)
 
-  
-  const fetchProfile = async () => {
-    try {
-      const response = await fetch(URI);
-      const json = await response.json();
-      if (response.ok) {
-        setClient(json);
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  const [modified, setModified] = useState(false)
 
+  const handleModified = () => {
+    setModified(!modified)
+  }
 
   const tabs=[ 
     {
@@ -70,26 +61,33 @@ const Profile = ({clientId, setView}) => {
 
     }]
   
-  
-  useEffect(() => {
-    fetchProfile();
-  }, []);
+
 
   return (
     <div className="profile">
+      {isLoading 
+      ? <ClipLoader
+      loading={isLoading}
+      size={150}
+      aria-label="Loading Spinner"
+      data-testid="loader"
+    />
+      :   <>
       <div className="top">
         <ArrowBackIcon className="backArrow" onClick={() => {setView('client')}} />
         <div className="heading">
-            <p>{client.first_name} {client.last_name} </p>
+            {isLoading ? "loading" : <p>{client.first_name} {client.last_name} </p>}
         </div>
       </div>
         <TabSelector
-        client={client ? client : null}
+        isLoading={isLoading}
+        client={client}
         tabs={tabs}
+        handleModified={handleModified}
         />
-          {/* <Button title='Create Appointment' id='create' kind='green' handler={handleClick}></Button>
-          <Button title='Edit Appointment' id='edit' kind='orange' handler={handleClick}></Button>
-          <Button title='View Appointment' id='view' kind='blue' handler={handleClick}></Button> */}
+        </>
+          }
+    
     </div>
   );
 };

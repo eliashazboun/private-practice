@@ -14,28 +14,37 @@ import AdminDashboard from "./pages/AdminDashboard";
 import Loading from "./pages/Loading";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import React, { useEffect, useState } from "react";
 
-function OwnerAuthenticatedApp({ isLoggedIn,setIsLoggedIn,user }) {
+export const UserContext = React.createContext();
 
+function OwnerAuthenticatedApp({ isLoggedIn, setIsLoggedIn, user }) {
+  const [userInfo, setUserInfo] = useState();
+
+  useEffect(() => {
+    setUserInfo(user);
+  }, [user]);
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <div className="App">
         <BrowserRouter>
-          <NavBar isLoggedIn={isLoggedIn} user={user}/>
+          <NavBar isLoggedIn={isLoggedIn} user={user && user} />
           <div className="pages">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/api/clients" element={<Clients />} />
-              <Route path="/api/profile/" element={<Profile />} />
-              <Route path="/api/appointments" element={<Appointment />} />
-              <Route path="/api/video" element={<Video />} />
-              <Route path='/api/login' element={<Login setIsLoggedIn={setIsLoggedIn}/>}/>
-              <Route path='/api/signup' element={<Signup/>}/>
-              <Route path="/api/admindash" element={<AdminDashboard />} />
-              <Route path="/api/loading" element={<Loading />} />
-              <Route path="*" element={<Home />} />
-            </Routes>
+            <UserContext.Provider value={userInfo}>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/api/clients" element={<Clients />} />
+                <Route path="/api/profile/" element={<Profile />} />
+                <Route path="/api/appointments" element={<Appointment />} />
+                <Route path="/api/video" element={<Video />} />
+                <Route path="/api/login"element={<Login setIsLoggedIn={setIsLoggedIn} />}/>
+                <Route path="/api/signup" element={<Signup />} />
+                <Route path="/api/admindash" element={<AdminDashboard />} />
+                <Route path="/api/loading" element={<Loading />} />
+                <Route path="*" element={<Home />} />
+              </Routes>
+            </UserContext.Provider>
           </div>
           <Footer />
         </BrowserRouter>

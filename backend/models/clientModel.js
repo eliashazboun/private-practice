@@ -20,19 +20,13 @@ const clientSchema = new Schema({
         required: true,
         maxLength: 255,
     },
-
-    phone : {
-        type: String,
-        required: true,
-        maxLength: 255,
-    },
     gender : {
         type:String,
         required: true,
         maxLength:50,
     },
 
-    email: {
+    username: {
         type: String,
         requird: true,
         maxLength: 255,
@@ -51,7 +45,20 @@ const clientSchema = new Schema({
     isAdmin:{
         type:Boolean,
         default:false
+    },
+
+    phone:{
+        type:[String],
+        required: true,
+        default: '2522221029'
+    },
+    email: {
+        type: [String],
+        required: true,
+        default: 'Testing@yahoo.com'
     }
+
+    
 });
 
 

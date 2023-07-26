@@ -10,7 +10,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Footer from './components/Footer/Footer';
 
-function UnauthenticatedApp({isLoggedIn,setIsLoggedIn}) {
+function UnauthenticatedApp({isLoggedIn,setIsLoggedIn,setUser}) {
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}> 
@@ -20,7 +20,7 @@ function UnauthenticatedApp({isLoggedIn,setIsLoggedIn}) {
         <div className='pages'>
           <Routes>
             <Route path='/' element={<Home/>}/>
-            <Route path='/api/login' element={<Login setIsLoggedIn={setIsLoggedIn}/>}/>
+            <Route path='/api/login' element={<Login setIsLoggedIn={setIsLoggedIn} setUser={setUser}/>}/>
             <Route path='/api/signup' element={<Signup/>}/>
             <Route path='*' element={<Home/>}/>
 

@@ -8,9 +8,13 @@ import UnauthenticatedApp from './UnauthenticatedApp';
 import ClientAuthenticatedApp from './ClientAuthenticatedApp';
 
 const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState()
-  const [isOwner, setIsOwner] = useState()
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [isOwner, setIsOwner] = useState(false)
   const [user, setUser] = useState()
+
+  const handleUser = (user) => {
+    setUser(user)
+  }
 
   useEffect(() => {
     const token = localStorage.getItem("token")
@@ -29,7 +33,7 @@ const App = () => {
    <>
     {isLoggedIn && isOwner ? <OwnerAuthenticatedApp isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} user={user}/> 
       : isOwner === false && isLoggedIn === true ? <ClientAuthenticatedApp isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} user={user}/>
-      : <UnauthenticatedApp isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/> }
+      : <UnauthenticatedApp isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setUser={handleUser}/> }
    </>
   );
 }

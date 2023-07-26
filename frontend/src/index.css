@@ -5,9 +5,14 @@
 }
 
 html{
-  overflow-y: scroll;
+  overflow-y: visible;
+  overflow-x: hidden;
 }
 
 .pages{
   padding-top: 70px;
+}
+
+.swal2-shown{
+  padding-right: 0px !important;
 }

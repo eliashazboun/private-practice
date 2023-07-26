@@ -34,7 +34,7 @@ const FormInput = (props) => {
             inputProps.name === "confirmPassword" && setFocused(true)
           }
         />
-        <span>{errorMessage}</span>
+        <span className="errorMessage">{errorMessage}</span>
         </>
       )}
 

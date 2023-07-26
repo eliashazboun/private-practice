@@ -6,12 +6,9 @@ import Sidebar from "../components/Sidebar/Sidebar";
 
 const AdminDashboard = () => {
 
-  const [view, setView] = useState('client')
-  const [selected, setSelected] = useState('client')
-
-
+  const [selected, setSelected] = useState('dash')
+  
   const clickHandler = (e) => {
-    setView(e.currentTarget.id)
     setSelected(e.currentTarget.id)
   }
 
@@ -20,7 +17,7 @@ const AdminDashboard = () => {
       <div className="wrapper">
         <Sidebar clickHandler={clickHandler} selected={selected}/>
         <div className="content">
-          <AdminDashView view={view} setView={setView}/>
+          <AdminDashView selected={selected}/>
         </div>
       </div>
     </div>

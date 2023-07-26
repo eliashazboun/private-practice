@@ -1,8 +1,39 @@
+
+
 .contentRow{
     width: 100%;
     display: flex;
     padding: 10px 2px;
     align-items: center;
+
+    .icons{
+        >*{
+            padding: 2px;
+            &:hover{
+                background-color: rgba(128, 128, 128, 0.307);
+                border-radius: 50%;
+            }
+        }
+
+        .copy{
+            position: relative;
+            .tooltip{
+                font-size: 12px;
+                text-align: left;
+                position: absolute;
+                top: -15px;
+                width: 100%;
+                opacity: 1;
+                left: -5px;
+                height: 30%;
+            }
+            .hide{
+                display: none;
+            }
+        }
+    }
+
+
 }
 
 .space-between{

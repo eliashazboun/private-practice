@@ -1,9 +1,12 @@
 import React from 'react'
 import './AppointmentsTab.scss'
+import TBI from '../../TBI/TBI'
 
 const AppointmentsTab = () => {
   return (
-    <div className='appointmentsTab'>AppointmentsTab</div>
+    <div className='appointmentsTab'>
+      <TBI title={'AppointmentsTab'}/>
+    </div>
   )
 }
 

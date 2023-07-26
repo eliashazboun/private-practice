@@ -37,7 +37,6 @@ router.get('/:startTime/:endTime/:date', async (req,res) => {
     let flag = false
 
     if(appointments.length === 0){
-        console.log('Hi I just Ran')
         return res.status(404).json({msg: 'No appointments on this day'})
     }
 
@@ -53,7 +52,6 @@ router.get('/:startTime/:endTime/:date', async (req,res) => {
         if (incomingStartTime < currEndTime && incomingEndTime > currStartTime){
             flag = true;
         }
-        console.log(currStartTime,currEndTime,incomingStartTime, incomingEndTime)
 
     });
 

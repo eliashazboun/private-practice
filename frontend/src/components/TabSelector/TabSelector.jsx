@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import './TabSelector.scss'
 import TabItem from '../TabItem/TabItem'
+import ClipLoader from "react-spinners/ClipLoader";
 
-const TabSelector = ({tabs,client}) => {
+
+const TabSelector = ({tabs,client,isLoading, handleModified}) => {
 
   const [active, setActive] = useState("0")
   
@@ -18,7 +20,10 @@ const TabSelector = ({tabs,client}) => {
           {tabs.map((tab,index) => { return <TabItem handleClick={handleClick} info={tab} key={index} id={index} selected={index.toString() === active ? true : false}></TabItem>})}
       </div>
       <div className="tabView">
-        <View client={client}/>
+        {isLoading 
+        ? <ClipLoader loading={isLoading} size={150} aria-label="Loading Spinner" data-testid="loader"/> 
+        : <View client={client} handleModified={handleModified}/>
+}
       </div>
     </div>
 
