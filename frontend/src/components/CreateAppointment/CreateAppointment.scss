@@ -1,5 +1,10 @@
-.view{
-    position: inline;
-    height: 100%;
-    
+.create-appointment {
+  .wrapper{
+    .form{
+      display: flex;
+      gap: 20px;
+      flex-direction: column;
+    }
+  }
+
 }

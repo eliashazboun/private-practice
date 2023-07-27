@@ -45,14 +45,11 @@ router.get('/:startTime/:endTime/:date', async (req,res) => {
     
     
     appointments.forEach(appointment => {
-
         const currStartTime = formatTime(appointment.start_time)
         const currEndTime = formatTime(appointment.end_time)
-
         if (incomingStartTime < currEndTime && incomingEndTime > currStartTime){
             flag = true;
         }
-
     });
 
     if (flag){
@@ -64,16 +61,38 @@ router.get('/:startTime/:endTime/:date', async (req,res) => {
 
 router.post('/', async (req,res) => {
     const {title, date, start_time, end_time, client_id } = req.body
-    //Creating appointment and linking the appointment id with the Client
+    console.log(req.body)
     try{
-        const appointment = await Appointment.create({title,date,start_time,end_time,client_id})
+        const appointments = await Appointment.find({date: date});
 
-        const client = await Client.findById(client_id);
-        client.appointments.push(appointment._id);
+        let flag = false
 
-        await client.save();
+        if(appointments.length !== 0){
+            let incomingStartTime = formatTime(start_time)
+            let incomingEndTime = formatTime(end_time)
+            
+            appointments.forEach(appointment => {
+                const currStartTime = formatTime(appointment.start_time)
+                const currEndTime = formatTime(appointment.end_time)
+                if (incomingStartTime < currEndTime && incomingEndTime > currStartTime){
+                    flag = true;
+                }
+            });
+        }
 
-        res.status(200).json(appointment)
+        if(flag){
+            res.status(400).json({msg:'overlap'})
+        }else{
+            const appointment = await Appointment.create({title,date,start_time,end_time,client_id})
+    
+            const client = await Client.findById(client_id);
+            client.appointments.push(appointment._id);
+    
+            await client.save();
+    
+            res.status(200).json(appointment)
+        }
+
     }catch(err){
         res.status(400).json({error: err.message})
     }

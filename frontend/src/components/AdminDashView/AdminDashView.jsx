@@ -3,18 +3,21 @@ import './AdminDashView.scss'
 
 import Clients from '../../pages/Clients'
 import Profile from '../../pages/Profile'
-import useFetch from '../../hooks/useFetch.js'
-import ClipLoader from "react-spinners/ClipLoader";
+import Calendar from '../../pages/Calendar/Calendar'
+
+import useFetch from '../../hooks/useFetch'
 
 
-const AdminDashView = ({selected}) => {
+const AdminDashView = ({selected,allClients}) => {
     const [view, setView] = useState(selected)
-
     const [clientId, setClientId]= useState('none')
-    const {data:allClient, isLoading:isLoadingAllClients, error:allClientError} = useFetch(`/api/clients`)
+
+    const {data:allAppointments, isLoading, error} = useFetch('/api/appointments')
+
 
     useEffect(()=>{
         setView(selected)
+        console.log('Rerender')
     },[selected])
 
   return (
@@ -22,11 +25,11 @@ const AdminDashView = ({selected}) => {
         {(() => {
             switch(view){
                 case 'client':
-                    return (isLoadingAllClients 
-                    ? "Loading..."
-                    : <Clients setView={setView} setClientId={setClientId} allClients={allClient} />)
+                    return <Clients setView={setView} setClientId={setClientId} allClients={allClients} />
                 case 'appointment':
-                    return <h1>Appointment</h1>
+                    return isLoading 
+                        ? 'Loading...' 
+                        : <Calendar allClients={allClients} allAppointments={allAppointments}/>
                 case 'video':
                     return <h1>Video</h1>
                 case 'profile':

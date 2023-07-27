@@ -1,0 +1,16 @@
+.calendar{
+    .wrapper{
+        display: flex;
+
+        .calendarSideNav{
+            flex: 1;
+            min-width: 20%;
+        }
+        .fc{
+            flex: 5;
+            height: 90vh;
+            object-fit: contain;
+        }
+    }
+
+}

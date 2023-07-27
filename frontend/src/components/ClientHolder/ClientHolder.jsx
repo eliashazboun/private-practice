@@ -59,7 +59,9 @@ const ClientHolder = ({clients,keyword, setView, setClientId}) => {
         return [
           
           <GridActionsCellItem
-          style={{border:'2px solid black'}}
+            style={{color:'red'}}
+          
+          
             icon={<DeleteIcon />}
             label="Delete"
             onClick={(e) => {deletePopup(() =>handleDelete(id),row.firstName + row.lastName)}}
@@ -89,11 +91,15 @@ const ClientHolder = ({clients,keyword, setView, setClientId}) => {
   
   
   const handleCellClick = (e) => {
-   
-    if(e.field !== 'actions'){
+    if(e.field !== 'actions' && e.field !== 'id'){
       console.log('hi')
       setView('profile')
       setClientId(e.id)
+    }
+
+    if (e.field === 'id'){
+      navigator.clipboard.writeText(e.id)
+
     }
   }
   

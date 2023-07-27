@@ -4,8 +4,7 @@ const mongoose = require("mongoose");
 const Client = require("../models/clientModel.js");
 const auth = require("../middleware/auth.js");
 
-
-//GET ALL CLIENTS
+//Get all clients.
 router.get("/", auth, async (req, res) => {
   try {
     const clients = await Client.find({})
@@ -20,7 +19,7 @@ router.get("/", auth, async (req, res) => {
   }
 });
 
-//GET SINGLE CLIENT BY ID
+//Get single client by ID.
 router.get("/:id", auth, async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
     return res.status(400).json({ msg: "No such client exists" });
@@ -37,7 +36,7 @@ router.get("/:id", auth, async (req, res) => {
   }
 });
 
-//CREATE NEW CLIENT
+//Creates new client.
 router.post("/", async (req, res) => {
   const {
     first_name,
@@ -77,98 +76,89 @@ router.post("/", async (req, res) => {
   }
 });
 
-//ADD NEW CONTACT TO CLIENT
+//Add new contact info (email, phone) to client account.
 router.post("/addContact/:id", async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
     return res.status(400).json({ msg: "No such client exists" });
   }
-  try{
+  try {
+    const field = Object.keys(req.body)[0];
+    const value = Object.values(req.body)[0];
 
-    const field =Object.keys(req.body)[0]
-    const value = Object.values(req.body)[0]
+    const present = await Client.findOne({
+      _id: req.params.id,
+      [field]: value,
+    });
 
-    const present = await Client.findOne(
-      {_id: req.params.id, [field]:value})
-
-    if (present){
-      return res.status(400).json({error: "Phone number already on record."})
-      
-    }else{
+    if (present) {
+      return res.status(400).json({ error: "Phone number already on record." });
+    } else {
       const client = await Client.findOneAndUpdate(
         { _id: req.params.id },
-        { $push: req.body},
-        {returnDocument:'after'},
-        { upsert: true },
+        { $push: req.body },
+        { returnDocument: "after" },
+        { upsert: true }
       );
 
-     
       res.status(200).json(client);
     }
-  }catch(err){
-    res.status(400).json({error: err})
+  } catch (err) {
+    res.status(400).json({ error: err });
   }
-
 });
 
-//EDIT CONTACT ON CLIENT
+//Edit contact info (email, phone) on client account
 router.post("/editContact/:id", async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
     return res.status(400).json({ msg: "No such client exists" });
   }
-  try{
+  try {
+    const field = Object.keys(req.body.prev)[0];
 
-    const field =Object.keys(req.body.prev)[0]
+    const oldValue = Object.values(req.body.prev)[0];
+    const newValue = Object.values(req.body.updated)[0];
 
-    const oldValue = Object.values(req.body.prev)[0]
-    const newValue = Object.values(req.body.updated)[0]
-    console.log(oldValue,newValue)
+    const present = await Client.findOne({
+      _id: req.params.id,
+      [field]: newValue,
+    });
 
-    
+    if (present) {
+      return res.status(400).json({ error: "Phone number already on record." });
+    } else {
+      const client = await Client.findOneAndUpdate(
+        { _id: req.params.id, [field]: oldValue },
+        { $set: req.body.updated },
+        { returnDocument: "after" }
+      );
 
-    const present = await Client.findOne(
-      {_id: req.params.id, [field]:newValue})
+      res.status(200).json(client);
+    }
+  } catch (err) {
+    console.log(err);
 
-     
-    
-      if (present){
-        return res.status(400).json({error: "Phone number already on record."})
-        
-      }else{
-        const client = await Client.findOneAndUpdate(
-        { _id: req.params.id,[field]:oldValue },
-        { $set: req.body.updated},
-        {returnDocument:'after'});
-
-        console.log(client)
-
-        res.status(200).json(client);
-      }
-  }catch(err){
-    console.log(err)
-
-    res.status(400).json(err)
+    res.status(400).json(err);
   }
-
 });
 
-//REMOVE CONTACT FROM CLIENT
+//Remove a contact info (email, phone) from client account.
 router.delete("/removeContact/:id", async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
     return res.status(400).json({ msg: "No such client exists" });
   }
-  try{   
+  try {
     const client = await Client.findOneAndUpdate(
-      {_id: req.params.id},
-      {$pull: req.body},
-      {returnDocument: 'after'}
-    )
-    res.status(200).json(client)
-
-  }catch(err){
-    res.status(400).json(err)
+      { _id: req.params.id },
+      { $pull: req.body },
+      { returnDocument: "after" }
+    );
+    res.status(200).json(client);
+  } catch (err) {
+    res.status(400).json(err);
   }
 });
 
+//Delete a client account.
 router.delete("/:id", async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
     return res.status(400).json({ msg: "No such client exists" });
@@ -194,9 +184,7 @@ router.patch("/:id", async (req, res) => {
 
   const client = await Client.findOneAndUpdate(
     { _id: req.params.id },
-    {
-      ...req.body,
-    }
+    {...req.body,}
   );
 
   if (!client) {
