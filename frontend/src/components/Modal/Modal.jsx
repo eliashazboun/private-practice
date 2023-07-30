@@ -3,13 +3,14 @@ import "./Modal.scss";
 import ModalContact from "./ModalViews/ModalContact";
 import CloseIcon from "@mui/icons-material/Close";
 
-const Modal = ({ handleOpen, modalId, clientHandler, handleClose }) => {
+const Modal = ({ handleOpen, modalId, clientHandler, handleClose,children }) => {
   return (
     <>
       {handleOpen && (
         <div className="modal">
           <div className="modalMain">
             <CloseIcon className="close" onClick={handleClose} />
+            {children}
 
             <div className="wrap">
               {modalId && modalId === "contact" && (

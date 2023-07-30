@@ -4,6 +4,14 @@
       display: flex;
       gap: 20px;
       flex-direction: column;
+
+      .submit-button{
+        border: 2px solid lime;
+      }
+    }
+    .error{
+      text-align: center;
+      color: red;
     }
   }
 

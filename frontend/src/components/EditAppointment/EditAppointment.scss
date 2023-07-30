@@ -1,3 +1,17 @@
 .editAppointment{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    h2{
+        text-align: center;
+    }
+    .wrapper{
+        .form{
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            
+        }
+    }
     
 }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./AdminDashboard.scss";
 
 import useFetch from "../hooks/useFetch";
@@ -14,6 +14,8 @@ const AdminDashboard = () => {
   const clickHandler = (e) => {
     setSelected(e.currentTarget.id);
   };
+
+  useEffect(()=>{console.log('I ran')},[])
 
   return (
     <div className="adminDash">
