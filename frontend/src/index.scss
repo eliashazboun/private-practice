@@ -195,3 +195,13 @@ width: auto;
   transform: translateY(0);
 }
 }
+
+.even-columns {
+  display: flex;
+  & > * {
+    flex: 1;
+  }
+}
+
+svg[class^='MuiSvgIcon-']{
+}

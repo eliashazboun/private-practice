@@ -19,6 +19,7 @@ const EditAppointment = ({
   editEvent,
   handleEditClose,
   deleteAppointments,
+  dateChange
 }) => {
   const [startTime, setStartTime] = useState(null);
   const [endTime, setEndTime] = useState(null);
@@ -38,6 +39,8 @@ const EditAppointment = ({
       if (e.$D) {
         gotoDate(new Date(e.$d));
         slotSelect(new Date(e.$d.toDateString()));
+        dateChange(e)
+        
       }
     }
   };
@@ -58,6 +61,7 @@ const EditAppointment = ({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log('SUbmit', date)
 
     let start_time;
     let end_time;

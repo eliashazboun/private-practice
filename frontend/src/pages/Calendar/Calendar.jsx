@@ -7,7 +7,6 @@ import dayGridPlugin from "@fullcalendar/daygrid"; // a plugin!
 import interactionPlugin from "@fullcalendar/interaction"; // needed for dayClick
 import dayjs from "dayjs";
 import Modal from "../../components/Modal/Modal";
-import { formatTime } from "../../helpers/formatTime";
 
 const Calendar = ({
   allClients,
@@ -25,9 +24,9 @@ const Calendar = ({
     data: null,
   });
   const [appointmentInfoView, setAppointmentInfoView] = useState({
-    open:false,
-    data:null
-  })
+    open: false,
+    data: null,
+  });
   const [editAppointmentView, setEditAppointmentView] = useState({
     open: false,
     data: null,
@@ -62,6 +61,40 @@ const Calendar = ({
     }
   };
 
+  const handleDateChange = (e) => {
+    console.log(e.toISOString())
+    const appointmentLength =
+          dayjs(editAppointmentView.data.end).get("hour") -
+          dayjs(editAppointmentView.data.start).get("hour");
+    console.log(appointmentLength)
+    let updatedAppointment = { ...editAppointmentView.data };
+    updatedAppointment.start = dayjs(e).toISOString();
+    updatedAppointment.end = dayjs(e)
+    .add(appointmentLength, "hour")
+    .toISOString();
+    setEditAppointmentView({
+      open: true,
+      data: editAppointmentView.data,
+      change: updatedAppointment,
+    });
+
+
+    // const appointmentLength =
+    //   dayjs(editAppointmentView.data.end).get("hour") -
+    //   dayjs(editAppointmentView.data.start).get("hour");
+
+    // let updatedAppointment = { ...editAppointmentView.data };
+    // updatedAppointment.start = dayjs(e).get('') .toISOString();
+    // updatedAppointment.end = dayjs(e.date)
+    //   .add(appointmentLength, "hour")
+    //   .toISOString();
+    // setEditAppointmentView({
+    //   open: true,
+    //   data: editAppointmentView.data,
+    //   change: updatedAppointment,
+    // });
+  };
+
   const handleEventClick = (e) => {
     if (prevEvent) {
       prevEvent.el.style.backgroundColor = "#3788D8";
@@ -71,9 +104,9 @@ const Calendar = ({
     e.el.style.backgroundColor = "red";
     handleCreateClose();
     setAppointmentInfoView({
-        open:true,
-        data:e.event.toPlainObject()
-    })
+      open: true,
+      data: e.event.toPlainObject(),
+    });
 
     // setEditAppointmentView({
     //   open: true,
@@ -100,26 +133,25 @@ const Calendar = ({
 
   const handleAppointInfoClose = () => {
     if (prevEvent) {
-        prevEvent.el.style.backgroundColor = "#3788D8";
-      }
+      prevEvent.el.style.backgroundColor = "#3788D8";
+    }
     setAppointmentInfoView({
-        open:false,
-        data:null
-    })
-  }
+      open: false,
+      data: null,
+    });
+  };
 
   const handleEditOpen = (data) => {
     setEditAppointmentView({
-        open:true,
-        data:data
-    })
+      open: true,
+      data: data,
+    });
 
     setAppointmentInfoView({
-        open:false,
-        data:null
-    })
-
-  }
+      open: false,
+      data: null,
+    });
+  };
 
   const handleEditClose = (del) => {
     console.log(del);
@@ -150,7 +182,6 @@ const Calendar = ({
     calendarApi.unselect();
   };
 
-
   const populateEvents = () => {
     setEvents([]);
     allAppointments.forEach((appointment) => {
@@ -174,8 +205,6 @@ const Calendar = ({
     populateEvents();
   }, [allAppointments]);
 
-
-
   return (
     <div className="calendar">
       <div className="wrapper">
@@ -192,6 +221,7 @@ const Calendar = ({
           handleCreateClose={handleCreateClose}
           handleEditOpen={handleEditOpen}
           handleEditClose={handleEditClose}
+          handleDateChange={handleDateChange}
           editEvent={editEvent}
           editAppointments={editAppointments}
           addAppointments={addAppointments}

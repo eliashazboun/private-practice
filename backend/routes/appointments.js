@@ -6,7 +6,7 @@ const Client = require("../models/clientModel.js");
 
 router.get("/", async (req, res) => {
   try {
-    const appointments = await Appointment.find({}).sort({ createdAt: -1 });
+    const appointments = await Appointment.find({}).sort({ date: 1 });
     res.status(200).json(appointments);
   } catch (err) {
     res.status(400).json({ error: err.message });

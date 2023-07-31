@@ -3,7 +3,7 @@ import './ContentItem.scss'
 
 import { EditContext } from './ContentRow'
 
-const ContentItem = ({value,label}) => {
+const ContentItem = ({value,label,children}) => {
   const handler = useContext(EditContext)
   const inputRef = useRef(null)
 
@@ -27,7 +27,10 @@ const ContentItem = ({value,label}) => {
             {handler.error && <span className='errorM'>Phone number already on record</span>}
         </div>
 
-        <div className='label'>{label}</div>
+        <div className='label'>
+          {label}
+          {children}
+        </div>
     </div>
     
     </div>

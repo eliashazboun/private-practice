@@ -29,8 +29,6 @@ const CreateAppointment = ({
     name: null,
   });
 
-  const [timeError, setTimeError] = useState(false);
-  const [overLapError, setOverLapError] = useState(false);
 
   const handleStartTimeChange = (e) => {
     setStartTime(e);

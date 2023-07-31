@@ -116,7 +116,7 @@ const ContentRow = ({ children, edit, copy, del, value, handleChange, rowId }) =
             </div>
           }
 
-          {del && <DeleteIcon onClick={() => deletePopup(handleDelete)} />}
+          {del && <DeleteIcon onClick={() => deletePopup(handleDelete,value)} />}
         </div>
       }
     </div>

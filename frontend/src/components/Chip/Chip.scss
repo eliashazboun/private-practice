@@ -1,0 +1,30 @@
+.chip{
+    margin: 10px 20px;
+    padding: 10px;
+    border-radius: 5px;
+    height: 150px;
+    width: 150px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+    display: flex;
+    flex-direction: column;
+    .top{
+        flex: 1;
+        font-size: 80px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+    .middle{
+        text-align: center;
+        font-size: 14px;
+    }
+    .bottom{
+        display: flex;
+        border-bottom: 1px solid gray;
+        justify-content: center;
+        align-items: center;
+    }
+}

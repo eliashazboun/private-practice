@@ -21,6 +21,7 @@ const CalendarSideNav = ({
   editAppointments,
   addAppointments,
   deleteAppointments,
+  handleDateChange,
   editEvent,
 }) => {
   return (
@@ -41,7 +42,8 @@ const CalendarSideNav = ({
         ) : editAppointmentView.open ? (
           <>
             <EditAppointment 
-              data={editAppointmentView.data} 
+              data={editAppointmentView.data}
+              dateChange={handleDateChange} 
               change={editAppointmentView.change}
               slotSelect={slotSelect}
               gotoDate={gotoDate}
