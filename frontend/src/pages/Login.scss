@@ -22,20 +22,15 @@
     }
   }
 
-  button {
+  .submit{
     width: 100%;
-    height: 50px;
-    padding: 10px;
-    border: none;
-    background-color: blue;
-    color: white;
-    border-radius: 5px;
-    font-weight: bold;
-    font-size: 18px;
-    cursor: pointer;
-    margin-top: 15px;
-    margin-bottom: 5px;
   }
+
+  .button{
+    flex: 1;
+  }
+
+
 
   .error{
     text-align: center;

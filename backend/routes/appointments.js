@@ -63,7 +63,7 @@ router.post("/", async (req, res) => {
       });
 
       const client = await Client.findById(client_id);
-      client.appointments.push(appointment._id);
+      client.appointments.push(appointment);
 
       await client.save();
 

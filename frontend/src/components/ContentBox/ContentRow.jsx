@@ -4,20 +4,19 @@ import React, { useContext, useState, createContext } from "react";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import DeleteIcon from "@mui/icons-material/Delete";
-import SaveIcon from '@mui/icons-material/Save';
+import SaveIcon from "@mui/icons-material/Save";
 
 import { IdContext } from "../ClientTabs/ProfileTab/ProfileTab";
 import { deletePopup } from "../../helpers/deletePopup";
 
-export const EditContext = createContext()
+export const EditContext = createContext();
 
-const ContentRow = ({ children, edit, copy, del, value, handleChange, rowId }) => {
+const ContentRow = ({ children, edit = false, copy = false, del = false, value, handleChange, rowId, boxId }) => {
   const clientId = useContext(IdContext);
-
   const [showTooltip, setShowTooltip] = useState(false);
-  const [editable, setEditable] = useState(false)
-  const [editedField,setEditedField] = useState()
-  const [error, setError] = useState(false)
+  const [editable, setEditable] = useState(false);
+  const [editedField, setEditedField] = useState();
+  const [error, setError] = useState(false);
 
   const handleDelete = async () => {
     const body = { [rowId]: value };
@@ -27,10 +26,7 @@ const ContentRow = ({ children, edit, copy, del, value, handleChange, rowId }) =
       body: JSON.stringify(body),
     };
     try {
-      const response = await fetch(
-        `/api/clients/removeContact/${clientId}`,
-        requestOptions
-      );
+      const response = await fetch(`http://localhost:4000/api/clients/remove${boxId}/${clientId}`, requestOptions);
       const json = await response.json();
       handleChange(json);
     } catch (err) {
@@ -42,39 +38,33 @@ const ContentRow = ({ children, edit, copy, del, value, handleChange, rowId }) =
     navigator.clipboard.writeText(value);
 
     setShowTooltip(true);
-    
+
     setTimeout(() => {
       setShowTooltip(false);
     }, "1000");
   };
 
   const toggleEdit = () => {
-    setEditable(true)
-    setEditedField(value)
+    setEditable(true);
+    setEditedField(value);
   };
 
   const handleEdit = (e) => {
-    setError(false)
-    setEditedField(e.target.textContent)
-  }
+    console.log(e.target.id);
+    setError(false);
+    setEditedField(e.target.textContent);
+  };
 
   const handleSave = async () => {
-    setError(false)
-    let updatedField;
+    setError(false);
 
-    if ( value === editedField){
-      setEditable(false)
-      return
+    if (value === editedField) {
+      setEditable((prev) => !prev);
+      return;
     }
 
-
-    if (rowId === 'username'){ //This is the username field that the client uses to log in
-      updatedField=rowId
-    }else{
-      updatedField = rowId + '.$' //This is for mongodb since its accessing an array
-    }
-
-    const body = { prev:{[rowId]: value},updated:{[updatedField]:editedField} };
+    const body = { prev: { [rowId]: value }, updated: { [rowId]: editedField } };
+    console.log(body);
 
     const requestOptions = {
       method: "POST",
@@ -83,42 +73,38 @@ const ContentRow = ({ children, edit, copy, del, value, handleChange, rowId }) =
     };
 
     try {
-      const response = await fetch(`/api/clients/editContact/${clientId}`,requestOptions);
+      const response = await fetch(`http://localhost:4000/api/clients/edit${boxId}/${clientId}`, requestOptions);
 
-      if (response.ok){
+      if (response.ok) {
         const json = await response.json();
         handleChange(json);
-        setEditable(false)
-      }else{
-        setError(true)
+        setEditable((prev) => !prev);
+      } else {
+        setError(true);
       }
     } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   return (
     <div className={`contentRow`}>
-      <EditContext.Provider value={{editHandler:handleEdit,editable:editable,error:error}}>
-         {children}
-      </EditContext.Provider>
+      <EditContext.Provider value={{ editHandler: handleEdit, editable: editable, error: error }}>{children}</EditContext.Provider>
 
-      {(edit || copy || del) &&
-       <div className="icons">
-          {(edit && !editable) 
-            ? <ModeEditIcon onClick={toggleEdit} />
-            : <SaveIcon onClick={handleSave}/>}
+      {(edit || copy || del) && (
+        <div className="icons">
+          {edit ? editable ? <SaveIcon onClick={handleSave} /> : <ModeEditIcon onClick={toggleEdit} /> : ""}
 
-          {copy && 
+          {copy && (
             <div className="copy">
               <ContentCopyIcon onClick={handleCopy} />
               <span className={showTooltip ? "tooltip" : "tooltip hide"}>Copied!</span>
             </div>
-          }
+          )}
 
-          {del && <DeleteIcon onClick={() => deletePopup(handleDelete,value)} />}
+          {del && <DeleteIcon onClick={() => deletePopup(handleDelete, value)} />}
         </div>
-      }
+      )}
     </div>
   );
 };

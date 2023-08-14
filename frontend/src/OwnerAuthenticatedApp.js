@@ -14,7 +14,11 @@ import AdminDashboard from "./pages/AdminDashboard";
 import Loading from "./pages/Loading";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import ClientDashboard from './pages/ClientDashboard/ClientDashboard';
 import React, { useEffect, useState } from "react";
+import ClientDashHome from "./pages/ClientDashboard/routes/ClientDashHome";
+import ClientDashInfo from "./pages/ClientDashboard/routes/ClientDashInfo";
+import ClientDashPayments from "./pages/ClientDashboard/routes/ClientDashPayments";
 
 export const UserContext = React.createContext();
 
@@ -41,6 +45,12 @@ function OwnerAuthenticatedApp({ isLoggedIn, setIsLoggedIn, user }) {
                 <Route path="/api/login"element={<Login setIsLoggedIn={setIsLoggedIn} />}/>
                 <Route path="/api/signup" element={<Signup />} />
                 <Route path="/api/admindash" element={<AdminDashboard />} />
+                <Route path='/api/clientdash' element={<ClientDashboard isLoggedIn={isLoggedIn}/>}>
+                  <Route path='home' element={<ClientDashHome/>}/>
+                  <Route path='info' element={<ClientDashInfo/>}/>
+                  <Route path='payments' element={<ClientDashPayments/>}/>
+                </Route>
+
                 <Route path="/api/loading" element={<Loading />} />
                 <Route path="*" element={<Home />} />
               </Routes>

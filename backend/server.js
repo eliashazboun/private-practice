@@ -8,6 +8,7 @@ const login = require('./routes/login');
 const signup = require('./routes/signup');
 const video = require('./routes/video');
 const admindash = require('./routes/admindash')
+const clientdash = require('./routes/clientdash')
 const cors = require('cors')
 
 
@@ -23,6 +24,7 @@ app.use('/api/login', login)
 app.use('/api/signup', signup)
 app.use('/api/video', video)
 app.use('/api/admindash', admindash)
+app.use('/api/clientdash', clientdash)
 
 app.get('/', (req,res) => {
     res.json({msg: 'Welcome to the app'})

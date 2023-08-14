@@ -1,0 +1,29 @@
+.video{
+    padding-top: 70px;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .container{
+        position: relative;
+        border: 1px solid black;
+        height: 700px;
+        width: 700px;
+        overflow: hidden;
+    }
+
+    .box{
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: hotpink;
+        height: 60px;
+        width: 60px;
+        cursor: pointer;
+
+    }
+  
+}

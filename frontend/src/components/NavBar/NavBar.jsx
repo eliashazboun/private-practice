@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import "./NavBar.scss";
 import Button from "../Button/Button";
 import UserThumbnail from "../UserThumbnail/UserThumbnail";
-import { decodeToken } from "react-jwt";
 
 const NavBar = ({isLoggedIn, user}) => {
   const location = useLocation();
@@ -70,7 +69,7 @@ const NavBar = ({isLoggedIn, user}) => {
           <Link to="/api/admindash">
             <h4>admindash</h4>
           </Link>
-          <Link to="/api/clientdash">
+          <Link to="/api/clientdash/home">
             <h4>clientdash</h4>
           
           </Link>

@@ -9,12 +9,41 @@ html{
   overflow-x: hidden;
 }
 
+
+input::placeholder{
+  color: black;
+}
+
+
 .pages{
   padding-top: 70px;
 }
 
 .swal2-shown{
   padding-right: 0px !important;
+}
+
+.display-f{
+  display: flex;
+}
+
+.unpaid{
+  width: fit-content;
+  padding: 5px;
+  border-radius: 5px;
+  font-weight: 900;
+  color: white;
+  background-color: red;
+  font-family: monospace;
+}
+.paid{
+  width: fit-content;
+  padding: 5px;
+  border-radius: 5px;
+  font-weight: 900;
+  color: white;
+  background-color: green;
+  font-family: monospace;
 }
 
 .button-orange{
@@ -204,4 +233,15 @@ width: auto;
 }
 
 svg[class^='MuiSvgIcon-']{
+}
+
+.pink-box{
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: hotpink;
+  height: 60px;
+  width: 60px;
+  cursor: pointer;
+
 }

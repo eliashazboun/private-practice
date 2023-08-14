@@ -2,10 +2,15 @@ import React from 'react'
 import './BillingTab.scss'
 import TBI from '../../TBI/TBI'
 
-const BillingTab = () => {
+const BillingTab = ({client}) => {
   return (
     <div className='billingTab'>
-      <TBI title={'BillingTab'}/>
+      <div className="even-columns">
+        <div className="left">
+          <h1>Charge</h1>
+          <input type="number"  />
+        </div>
+      </div>
     </div>
   )
 }

@@ -1,6 +1,9 @@
 .contentItem {
   flex: 1;
   position: relative;
+  .label {
+    color: gray;
+  }
 
   .wrapper {
     flex-direction: column;

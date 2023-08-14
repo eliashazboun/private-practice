@@ -17,13 +17,17 @@ const Clients = ({setView, setClientId, allClients,flag, setFlag}) => {
     setKeyword(keyword);
     setClients(filtered);
   };
-
+  
+  const deleteClient = (deletedClient) => {
+    const filtered = clients.filter((client) => client._id !== deletedClient._id)
+    setClients(filtered)
+  }
 
 
   return (
     <div className="Clients">
       <SearchBar keyword={keyword} onChange={updateKeyword} />
-      <ClientHolder clients={clients} keyword={keyword} setView={setView} setClientId={setClientId} flag={flag} setFlag={setFlag}/>
+      <ClientHolder clients={clients} deleteClient={deleteClient} keyword={keyword} setView={setView} setClientId={setClientId} flag={flag} setFlag={setFlag}/>
     </div>
   );
 }

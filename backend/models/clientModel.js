@@ -52,6 +52,21 @@ const clientSchema = new Schema({
         required: true,
         default: '2522221029'
     },
+    emergency:{
+        type:[{
+            firstName:String,
+            lastName:String,
+            relationship:String,
+            phone:String,
+        }],
+        default: {
+            firstName:'Elias',
+            lastName:'Hazboun',
+            relationship:'Co Worker',
+            phone: '2524698517'
+        },
+        required: false,
+    },
     email: {
         type: [String],
         required: true,

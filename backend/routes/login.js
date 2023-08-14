@@ -20,7 +20,7 @@ router.post('/', async (req,res) => {
             isAdmin:user.isAdmin
 
         },process.env.JWT_SECRET)
-        return res.json({token:token, status:'ok'})
+        return res.json({token:token})
     }else{
         return res.status(400).json({msg:'User not found, please check credentials',status:'notok'})
     }

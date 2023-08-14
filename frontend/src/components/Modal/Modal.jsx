@@ -1,27 +1,19 @@
-import React, { useState, useContext } from "react";
 import "./Modal.scss";
-import ModalContact from "./ModalViews/ModalContact";
 import CloseIcon from "@mui/icons-material/Close";
 
-const Modal = ({ handleOpen, modalId, clientHandler, handleClose,children }) => {
-  return (
-    <>
-      {handleOpen && (
-        <div className="modal">
-          <div className="modalMain">
-            <CloseIcon className="close" onClick={handleClose} />
-            {children}
-
-            <div className="wrap">
-              {modalId && modalId === "contact" && (
-                <ModalContact clientHandler={clientHandler} handleClose={handleClose}/>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
-    </>
-  );
+const Modal = ({ children, isOpen, showModal }) => {
+    return (
+        <>
+            {isOpen && (
+                <div className="modal">
+                    <div className="modalMain">
+                        <CloseIcon onClick={showModal} className="close" />
+                        {children}
+                    </div>
+                </div>
+            )}
+        </>
+    );
 };
 
 export default Modal;

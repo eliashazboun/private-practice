@@ -5,6 +5,8 @@ import axios from "axios";
 import { useState } from "react";
 import { decodeToken } from "react-jwt";
 
+//NEED TO FIX THIS FILE AND USE LINK FROM ROUTER DOM
+
 const Login = ({setIsLoggedIn,setUser}) => {
   const [error, setError] = useState(false);
 
@@ -36,7 +38,7 @@ const Login = ({setIsLoggedIn,setUser}) => {
     e.preventDefault();
     setError(false);
     try {
-      const response = await axios.post("/api/login", {
+      const response = await axios.post("http://localhost:4000/api/login", {
         email: values.email,
         password: values.password,
       });
@@ -50,7 +52,7 @@ const Login = ({setIsLoggedIn,setUser}) => {
           window.location.href = "/api/admindash";
         } else {
           setIsLoggedIn(true)
-          window.location.href = "/api/clientdash";
+          window.location.href = "/api/clientdash/home";
         }
       }
     } catch (err) {
@@ -77,8 +79,11 @@ const Login = ({setIsLoggedIn,setUser}) => {
               />
             );
           })}
-
-          <button>Log In</button>
+          <div className="display-f">
+            <button className="button-green button" type="button" onClick={() => {setValues({email:'admin@admin.com',password:'admin'})}}>Admin</button>
+            <button className="button-red button" type="button" onClick={() => {setValues({email:'client@client.com',password:'client'})}}>Client</button>
+          </div>
+          <button className="button-blue submit">Log In</button>
           {error && (
             <p className="error">Invalid credentials, please try again.</p>
           )}

@@ -1,15 +1,34 @@
 .editAppointment{
     display: flex;
     flex-direction: column;
+    width: 500px;
     gap: 20px;
     h2{
         text-align: center;
     }
     .wrapper{
+        padding: 20px;
+
+        
         .form{
+            padding: 20px;
             display: flex;
             flex-direction: column;
             gap: 20px;
+
+           
+
+            .left{
+                padding-right: 10px;
+                & > *:not(:last-child){
+                    margin-bottom: 20px;
+                }
+            }
+            .right{
+                & > *:not(:last-child){
+                    margin-bottom: 20px;
+                }
+            }
             
         }
     }

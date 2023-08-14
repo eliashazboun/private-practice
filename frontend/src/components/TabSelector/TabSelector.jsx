@@ -4,7 +4,7 @@ import TabItem from '../TabItem/TabItem'
 import ClipLoader from "react-spinners/ClipLoader";
 
 
-const TabSelector = ({tabs,client,isLoading, handleModified}) => {
+const TabSelector = ({tabs,client,isLoading}) => {
 
   const [active, setActive] = useState("0")
   
@@ -22,7 +22,7 @@ const TabSelector = ({tabs,client,isLoading, handleModified}) => {
       <div className="tabView">
         {isLoading 
         ? <ClipLoader loading={isLoading} size={150} aria-label="Loading Spinner" data-testid="loader"/> 
-        : <View client={client} handleModified={handleModified}/>
+        : <View client={client}/>
 }
       </div>
     </div>
